@@ -25,7 +25,7 @@ SECRET_KEY = 'a8tbqbsvjta&abn##v9%it#r^2(b+s%hmpfna9zi3anc=ydb6t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['e-commerce-amal.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['amalcommerce.herokuapp.com','127.0.0.1']
 
 
 # Application definition
