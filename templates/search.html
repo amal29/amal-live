@@ -1,0 +1,41 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        Search Result for
+        <span class="text-info">"{{request.GET.search}}"</span>
+      </h3>
+    </div>
+  </div>
+</div>
+<div class="row" id="box">
+  {%for product in products%}
+  <div class="col-lg-4">
+    <img
+      class="thumbnail"
+      src="{{product.image.url}}"
+      width="100px"
+      height="50px"
+    />
+    <div class="box-element product">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
+      <button
+        id="update"
+        data-product="{{product.id}}"
+        data-action="add"
+        class="btn btn-outline-secondary add-btn update-cart"
+      >
+        Add to cart
+      </button>
+
+      <a class="btn btn-outline-success" href="#">View</a>
+      <h4 style="display: inline-block; float: right">
+        ${{product.price|floatformat:2}}
+      </h4>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{% endblock content %}
