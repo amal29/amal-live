@@ -37,8 +37,28 @@
   });
 </script>
 <script>
-  
+  function my() {
+    var ser = document.getElementById("search_here").value;
+    console.log(ser);
+    $.ajax({
+      url: "search",
+      type: "get",
+      data: {
+        ser_itm: ser,
+      },
+      dataType: "json",
+      success: function (data) {
+        console.log(data);
+        $("#box").html(data.html_data);
+      },
+    });
+  }
+
+  if ((document.getElementById("search_here").value = "")) {
+    location.reload();
+  }
 </script>
+<script></script>
 <script>
   cartBtns = document.getElementsByClassName("update-cart");
   console.log("cart", cartBtns);

@@ -8,6 +8,8 @@ from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 def Login(request):
@@ -44,7 +46,7 @@ def Register(request):
 
 
 def Search(request):
-    search = request.GET.get('search')
+    search = request.GET.get("ser_itm")
     print("SEARCHITEM:",search)
     itm=Product.objects.filter(name__contains=search)  
     if request.user.is_authenticated:
@@ -59,8 +61,12 @@ def Search(request):
         order = {'get_cart_total':0, 'get_cart_items':0,'shipping':False}
         cartItems= order['get_cart_items']
     
+    html_data=render_to_string('text.html',{'products':itm,'cartItems':cartItems},request=request)
+    print("html_data")
+    # return render(request,'search.html',{'products':itm,'cartItems':cartItems}) 
+    return JsonResponse({'html_data':html_data})
 
-    return render(request,'search.html',{'products':itm,'cartItems':cartItems}) 
+
 
 
 
