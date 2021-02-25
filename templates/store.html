@@ -49,7 +49,9 @@
       dataType: "json",
       success: function (data) {
         console.log(data);
-        $("#box").html(data.html_data);
+        if (data == "Item not found") {
+          $("#box").html(data);
+        } else $("#box").html(data.html_data);
       },
     });
   }

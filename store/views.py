@@ -48,7 +48,6 @@ def Register(request):
 def Search(request):
     search = request.GET.get("ser_itm")
     print("SEARCHITEM:",search)
-    itm=Product.objects.filter(name__contains=search)  
     if request.user.is_authenticated:
         customer = request.user
         print(customer)
@@ -60,11 +59,17 @@ def Search(request):
         items = []
         order = {'get_cart_total':0, 'get_cart_items':0,'shipping':False}
         cartItems= order['get_cart_items']
-    
-    html_data=render_to_string('text.html',{'products':itm,'cartItems':cartItems},request=request)
-    print("html_data")
+    if Product.objects.filter(name__contains=search):
+        itm=Product.objects.filter(name__contains=search)  
+        html_data=render_to_string('text.html',{'products':itm,'cartItems':cartItems},request=request)
+        print("html_data")
     # return render(request,'search.html',{'products':itm,'cartItems':cartItems}) 
-    return JsonResponse({'html_data':html_data})
+        return JsonResponse({'html_data':html_data})
+    else:
+        return JsonResponse("Item not found", safe=False)
+ 
+     
+
 
 
 
